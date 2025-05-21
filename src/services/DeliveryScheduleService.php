@@ -26,7 +26,10 @@ class DeliveryScheduleService
     public static function get(string $date, bool $filter = true): array
     {
         try {
-            [$templates, $exceptionsTimeSlot, $exceptions] = self::getDatabase($date);
+            $day = date('Y-m-d', strtotime($date));
+            $today = date('Y-m-d');
+
+            [$templates, $exceptionsTimeSlot, $exceptions] = self::getDatabase($day);
 
             // 获取预订配送时间段 分钟步长的最小值
             $minutesStep = EbDeliveryTimeSlots::DEFAULT_MINUTES_STEP;
@@ -44,7 +47,7 @@ class DeliveryScheduleService
             $startTime = strtotime('00:00');
             $endTime = strtotime('23:59');
             for ($time = $startTime; $time <= $endTime; $time += $minutesStep * 60) {
-                if ($filter && $time < time()) {
+                if ($filter && $day === $today && $time < time()) {
                     continue;
                 }
 
