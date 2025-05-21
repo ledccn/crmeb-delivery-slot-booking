@@ -65,12 +65,12 @@ class DeliveryScheduleService
 
             // 根据键名升序排序
             if (empty($dateTimeSlots)) {
-                throw new ValidateException('暂无该日期的配送时间段');
+                throw new ValidateException('可用的配送时间段为空');
             } else {
                 ksort($dateTimeSlots, SORT_NUMERIC);
                 $dateTimeSlots = array_values($dateTimeSlots);
                 if (count($dateTimeSlots) < 2) {
-                    throw new ValidateException('该日期剩余的时间段不足');
+                    throw new ValidateException('剩余的配送时间段不足');
                 }
             }
 
@@ -107,7 +107,7 @@ class DeliveryScheduleService
         // 获取预订配送时间段模板
         $templates = EbDeliveryScheduleTemplates::queryByDayOfWeek($week)->select();
         if ($templates->isEmpty()) {
-            throw new ValidateException('暂无该日期的配送时间段');
+            throw new ValidateException('商家未设置配送时间段');
         }
         // 获取预订配送时间段异常
         /** @var EbDeliveryScheduleExceptions|null $exceptions */
