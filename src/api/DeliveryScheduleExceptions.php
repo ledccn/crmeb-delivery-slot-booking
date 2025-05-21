@@ -42,7 +42,10 @@ class DeliveryScheduleExceptions
      */
     public function index(Request $request): Response
     {
-        $where = ['day', '>=', date('Y-m-d')];
+        $where = [
+            ['day', '>=', date('Y-m-d')],
+            ['status',  '=', 0],
+        ];
         return response_json()->success($this->services->getList($where));
     }
 

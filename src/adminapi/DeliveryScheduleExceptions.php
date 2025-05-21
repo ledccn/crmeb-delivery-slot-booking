@@ -57,7 +57,7 @@ class DeliveryScheduleExceptions extends AuthController
         // 比较查询
         $day = $request->get('day');
         if ($day) {
-            $where = ['day', '>=', $day];
+            $where[] = ['day', '>=', $day];
         }
         if ($eqWhere) {
             foreach ($eqWhere as $key => $value) {
