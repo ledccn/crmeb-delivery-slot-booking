@@ -14,6 +14,7 @@ class DeliveryScheduleExceptionsDao extends BaseDao
      * 默认排序
      */
     public const DEFAULT_ORDER = 'day ASC';
+
     /**
      * 设置模型
      * @return string

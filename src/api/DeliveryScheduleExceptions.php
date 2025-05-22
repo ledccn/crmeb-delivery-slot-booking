@@ -44,7 +44,7 @@ class DeliveryScheduleExceptions
     {
         $where = [
             ['day', '>=', date('Y-m-d')],
-            ['status',  '=', 0],
+            ['status', '=', 0],
         ];
         return response_json()->success($this->services->getList($where));
     }
