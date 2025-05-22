@@ -11,6 +11,11 @@ use Ledc\DeliverySlotBooking\model\EbDeliveryScheduleTemplates;
 class DeliveryScheduleTemplatesDao extends BaseDao
 {
     /**
+     * 默认排序
+     */
+    public const DEFAULT_ORDER = 'day_of_week ASC';
+
+    /**
      * 设置模型
      * @return string
      */

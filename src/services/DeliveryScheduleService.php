@@ -19,7 +19,7 @@ class DeliveryScheduleService
 {
     /**
      * 获取预订配送时间段
-     * @param string|null $date 日期字符串（格式为 Y-m-d，例如：2025-05-01）
+     * @param string $date 日期字符串（格式为 Y-m-d，例如：2025-05-01）
      * @param bool $filter
      * @return array
      */

@@ -48,7 +48,7 @@ class DeliveryScheduleTemplatesService extends BaseServices
      */
     public function getList(array $where = []): array
     {
-        $list = $this->dao->selectList($where, '*', 0, 0, '', ['slots']);
+        $list = $this->dao->selectList($where, '*', 0, 0, DeliveryScheduleTemplatesDao::DEFAULT_ORDER, ['slots']);
         $count = $this->dao->count($where);
         return compact('list', 'count');
     }

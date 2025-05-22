@@ -14,13 +14,24 @@
 
 1. `php think test:delivery:schedule` 测试配送时间段，打印结果数组
 
+## 数据表
+
+1. `delivery_time_slots` 配送时间段表
+2. `delivery_schedule_templates` 配送时间段模板表
+3. `delivery_schedule_exceptions` 配送时间段异常表
+
 ## 业务逻辑说明
 
 1. 使用 `delivery_time_slots` 定义可以使用的配送时间段
-2. 系统默认使用 `delivery_schedule_templates` 定义每周的配送时间
-3. 如果某一天在 `delivery_schedule_exceptions` 中有定义，则使用 `delivery_schedule_exceptions` 中定义的配送时间，并通过
+2. 使用 `delivery_schedule_templates` 定义每周每天的配送时间段
+3. 如果某一天在 `delivery_schedule_exceptions` 中有定义，则使用 `delivery_schedule_exceptions` 中定义的配送时间段，并通过
    `status` 控制当天的配送状态
-4. 可以自由组合多个时间段，并通过 `enabled` 控制启用状态
+4. 可以在 `delivery_schedule_templates` 自由组合多个时间段，并通过 `enabled` 控制启用状态，灵活切换配送时间段
+
+## 助手类
+
+- `Ledc\DeliverySlotBooking\Helper::get` 获取预订配送时间段
+- `Ledc\DeliverySlotBooking\Helper::validate` 验证时间段是否在允许配送的时间段内
 
 ## 扩展建议
 
