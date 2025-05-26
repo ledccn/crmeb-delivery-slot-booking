@@ -27,7 +27,8 @@ class Command extends \think\console\Command
         $this->setFileMaps([
             'CreateDeliveryTimeSlots' => dirname(__DIR__) . '/migrations/01_create_delivery_time_slots.php',
             'CreateDeliveryScheduleTemplates' => dirname(__DIR__) . '/migrations/02_create_delivery_schedule_templates.php',
-            'CreateDeliveryScheduleExceptions' => dirname(__DIR__) . '/migrations/03_create_delivery_schedule_exceptions.php'
+            'CreateDeliveryScheduleExceptions' => dirname(__DIR__) . '/migrations/03_create_delivery_schedule_exceptions.php',
+            'UpdateStoreOrderExpectedFinishedBetweenTime' => dirname(__DIR__) . '/migrations/04_update_store_order_expected_finished_between_time.php',
         ]);
     }
 
