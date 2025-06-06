@@ -29,6 +29,7 @@ class Command extends \think\console\Command
             'CreateDeliveryScheduleTemplates' => dirname(__DIR__) . '/migrations/02_create_delivery_schedule_templates.php',
             'CreateDeliveryScheduleExceptions' => dirname(__DIR__) . '/migrations/03_create_delivery_schedule_exceptions.php',
             'UpdateStoreOrderExpectedFinishedBetweenTime' => dirname(__DIR__) . '/migrations/04_update_store_order_expected_finished_between_time.php',
+            'InsertSystemConfigDeliverySchedule' => dirname(__DIR__) . '/migrations/05_insert_system_config_delivery_schedule.php',
         ]);
     }
 

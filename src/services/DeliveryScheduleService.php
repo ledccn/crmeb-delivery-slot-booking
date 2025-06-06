@@ -2,9 +2,11 @@
 
 namespace Ledc\DeliverySlotBooking\services;
 
+use Ledc\DeliverySlotBooking\Helper;
 use Ledc\DeliverySlotBooking\model\EbDeliveryScheduleExceptions;
 use Ledc\DeliverySlotBooking\model\EbDeliveryScheduleTemplates;
 use Ledc\DeliverySlotBooking\model\EbDeliveryTimeSlots;
+use think\Collection;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
 use think\db\exception\ModelNotFoundException;
@@ -29,6 +31,11 @@ class DeliveryScheduleService
             $day = date('Y-m-d', strtotime($date));
             $today = date('Y-m-d');
 
+            /**
+             * @var Collection|EbDeliveryScheduleTemplates[] $templates
+             * @var EbDeliveryTimeSlots|null $exceptionsTimeSlot
+             * @var EbDeliveryScheduleExceptions|null $exceptions
+             */
             [$templates, $exceptionsTimeSlot, $exceptions] = self::getDatabase($day);
 
             // 获取预订配送时间段 分钟步长的最小值
@@ -46,8 +53,10 @@ class DeliveryScheduleService
             $dateTimeSlots = [];
             $startTime = strtotime('00:00');
             $endTime = strtotime('23:59');
+            // 商品的准备时间
+            $preparation_min_time = Helper::appointmentTimestamp();
             for ($time = $startTime; $time <= $endTime; $time += $minutesStep * 60) {
-                if ($filter && $day === $today && $time < time()) {
+                if ($filter && $day === $today && $time < $preparation_min_time) {
                     continue;
                 }
 

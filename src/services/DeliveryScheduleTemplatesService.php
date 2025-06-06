@@ -4,9 +4,11 @@ namespace Ledc\DeliverySlotBooking\services;
 
 use app\services\BaseServices;
 use Ledc\DeliverySlotBooking\dao\DeliveryScheduleTemplatesDao;
+use Ledc\DeliverySlotBooking\model\EbDeliveryScheduleExceptions;
 use Ledc\DeliverySlotBooking\model\EbDeliveryScheduleTemplates;
 use Ledc\DeliverySlotBooking\model\EbDeliveryTimeSlots;
 use ReflectionException;
+use think\Collection;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
 use think\db\exception\ModelNotFoundException;
@@ -72,6 +74,11 @@ class DeliveryScheduleTemplatesService extends BaseServices
             throw new ValidateException('开始时间必须小于结束时间');
         }
 
+        /**
+         * @var Collection|EbDeliveryScheduleTemplates[] $templates
+         * @var EbDeliveryTimeSlots|null $exceptionsTimeSlot
+         * @var EbDeliveryScheduleExceptions|null $exceptions
+         */
         [$templates, $exceptionsTimeSlot, $exceptions] = DeliveryScheduleService::getDatabase($date);
 
         // 获取预订配送时间段 分钟步长的最小值
