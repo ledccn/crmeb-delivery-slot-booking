@@ -19,7 +19,7 @@ class DeliveryTimeSlotsValidate extends Validate
         'title' => 'require',
         'start_time' => 'require|dateFormat:H:i:s',
         'end_time' => 'require|dateFormat:H:i:s',
-        'minutes_step' => 'require|in:10,15,20,30',
+        'minutes_step' => 'require|in:10,15,20,30,60,120,180',
         'enabled' => 'require|boolean',
     ];
 
