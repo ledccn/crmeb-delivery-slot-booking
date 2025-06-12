@@ -23,6 +23,7 @@ class DeliveryScheduleService
      * 配送时间段的结束时间偏移量
      */
     private const OFFSET_SECONDS = 60;
+
     /**
      * 获取预订配送时间段
      * @param string $date 日期字符串（格式为 Y-m-d，例如：2025-05-01）
