@@ -82,7 +82,7 @@ class DeliveryScheduleTemplatesService extends BaseServices
         [$templates, $exceptionsTimeSlot, $exceptions] = DeliveryScheduleService::getDatabase($date);
 
         // 获取预订配送时间段 分钟步长的最小值
-        $minutesStep = EbDeliveryTimeSlots::DEFAULT_MINUTES_STEP;
+        $minutesStep = EbDeliveryTimeSlots::MAX_MINUTES_STEP;
         /** @var EbDeliveryTimeSlots[]|array $slots */
         $slots = [];
         $templates->each(function (EbDeliveryScheduleTemplates $template) use (&$minutesStep, &$slots) {

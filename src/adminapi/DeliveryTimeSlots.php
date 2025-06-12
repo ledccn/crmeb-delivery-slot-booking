@@ -58,6 +58,8 @@ class DeliveryTimeSlots extends AuthController
      * @method POST
      * @param Request $request
      * @return Response
+     * @throws DataNotFoundException
+     * @throws ModelNotFoundException
      */
     public function save(Request $request): Response
     {

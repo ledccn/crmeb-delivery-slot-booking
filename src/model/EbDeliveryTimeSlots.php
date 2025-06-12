@@ -23,18 +23,20 @@ class EbDeliveryTimeSlots extends Model
      * @var string
      */
     protected $table = 'eb_delivery_time_slots';
-
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
     protected $pk = 'id';
-
     /**
      * 默认的分钟步长
      */
     public const DEFAULT_MINUTES_STEP = 30;
+    /**
+     * 最大的分钟步长
+     */
+    public const MAX_MINUTES_STEP = 180;
 
     /**
      * 生成全天配送时间段数组

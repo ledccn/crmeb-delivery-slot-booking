@@ -20,6 +20,10 @@ use Throwable;
 class DeliveryScheduleService
 {
     /**
+     * 配送时间段的结束时间偏移量
+     */
+    private const OFFSET_SECONDS = 60;
+    /**
      * 获取预订配送时间段
      * @param string $date 日期字符串（格式为 Y-m-d，例如：2025-05-01）
      * @param bool $filter
@@ -39,7 +43,7 @@ class DeliveryScheduleService
             [$templates, $exceptionsTimeSlot, $exceptions] = self::getDatabase($day);
 
             // 获取预订配送时间段 分钟步长的最小值
-            $minutesStep = EbDeliveryTimeSlots::DEFAULT_MINUTES_STEP;
+            $minutesStep = EbDeliveryTimeSlots::MAX_MINUTES_STEP;
             /** @var EbDeliveryTimeSlots[]|array $slots */
             $slots = [];
             $templates->each(function (EbDeliveryScheduleTemplates $template) use (&$minutesStep, &$slots) {
@@ -55,6 +59,7 @@ class DeliveryScheduleService
             $endTime = strtotime('23:59');
             // 商品的准备时间
             $preparation_min_time = Helper::appointmentTimestamp();
+            $flag = true;
             for ($time = $startTime; $time <= $endTime; $time += $minutesStep * 60) {
                 if ($filter && $day === $today && $time < $preparation_min_time) {
                     continue;
@@ -72,6 +77,11 @@ class DeliveryScheduleService
                             $dateTimeSlots[$time] = date('H:i', $time);
                         }
                     }, $slots);
+                }
+
+                if ($flag && $today !== date('Y-m-d', $time + $minutesStep * 60)) {
+                    $flag = false;
+                    $time = $time - self::OFFSET_SECONDS;
                 }
             }
 
@@ -93,7 +103,7 @@ class DeliveryScheduleService
                 $start = array_shift($dateTimeSlots);
                 $end = array_shift($dateTimeSlots);
                 $diff_time = strtotime($end) - strtotime($start);
-                if ($diff_time === $seconds) {
+                if ($diff_time === $seconds || $diff_time + self::OFFSET_SECONDS === $seconds) {
                     $result[] = [$start, $end];
                 }
                 array_unshift($dateTimeSlots, $end);
