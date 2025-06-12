@@ -91,24 +91,27 @@ class DeliveryScheduleTemplatesService extends BaseServices
             $minutesStep = min($minutesStep, $slot->minutes_step);
             $slots[] = $slot;
         });
+        $secondsStep = (int)($minutesStep * 60);
+        $diff_time = $end_timestamp - $start_timestamp;
 
         // 时间段必须为分钟步长
-        if ($end_timestamp - $start_timestamp !== (int)($minutesStep * 60)) {
+        if (($diff_time !== $secondsStep) || (($diff_time + DeliveryScheduleService::OFFSET_SECONDS) !== $secondsStep)) {
             throw new ValidateException('时间段必须为' . $minutesStep . '分钟');
         }
 
         foreach ([$start_timestamp, $end_timestamp] as $time) {
-            if ($exceptionsTimeSlot && !$exceptionsTimeSlot->validateBetweenTime($time)) {
-                return false;
+            if ($exceptionsTimeSlot) {
+                if (!$exceptionsTimeSlot->validateBetweenTime($time)) {
+                    return false;
+                }
             } else {
                 $canBook = false;
                 foreach ($slots as $slot) {
-                    if (false === $canBook && $slot->validateBetweenTime($time)) {
+                    if ($slot->validateBetweenTime($time)) {
                         $canBook = true;
-                        break;
                     }
                 }
-                if (false === $canBook) {
+                if (!$canBook) {
                     return false;
                 }
             }

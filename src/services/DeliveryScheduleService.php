@@ -22,7 +22,7 @@ class DeliveryScheduleService
     /**
      * 配送时间段的结束时间偏移量
      */
-    private const OFFSET_SECONDS = 60;
+    public const OFFSET_SECONDS = 60;
 
     /**
      * 获取预订配送时间段
@@ -53,6 +53,7 @@ class DeliveryScheduleService
                 $minutesStep = min($minutesStep, $slot->minutes_step);
                 $slots[] = $slot;
             });
+            $secondsStep = $minutesStep * 60;
 
             // 按分钟步长生成全天的 配送数组
             $dateTimeSlots = [];
@@ -60,8 +61,7 @@ class DeliveryScheduleService
             $endTime = strtotime('23:59');
             // 商品的准备时间
             $preparation_min_time = Helper::appointmentTimestamp();
-            $flag = true;
-            for ($time = $startTime; $time <= $endTime; $time += $minutesStep * 60) {
+            for ($time = $startTime; $time <= $endTime; $time += $secondsStep) {
                 if ($filter && $day === $today && $time < $preparation_min_time) {
                     continue;
                 }
@@ -80,9 +80,8 @@ class DeliveryScheduleService
                     }, $slots);
                 }
 
-                if ($flag && $today !== date('Y-m-d', $time + $minutesStep * 60)) {
-                    $flag = false;
-                    $time = $time - self::OFFSET_SECONDS;
+                if ($today !== date('Y-m-d', $time + $secondsStep)) {
+                    $time -= self::OFFSET_SECONDS;
                 }
             }
 
