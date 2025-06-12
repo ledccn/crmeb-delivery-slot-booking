@@ -53,7 +53,7 @@ class DeliveryScheduleService
                 $minutesStep = min($minutesStep, $slot->minutes_step);
                 $slots[] = $slot;
             });
-            $secondsStep = $minutesStep * 60;
+            $secondsStep = (int)($minutesStep * 60);
 
             // 按分钟步长生成全天的 配送数组
             $dateTimeSlots = [];
@@ -98,12 +98,11 @@ class DeliveryScheduleService
 
             // 确保双数的配送数组
             $result = [];
-            $seconds = (int)($minutesStep * 60);
             while (1 < count($dateTimeSlots)) {
                 $start = array_shift($dateTimeSlots);
                 $end = array_shift($dateTimeSlots);
                 $diff_time = strtotime($end) - strtotime($start);
-                if ($diff_time === $seconds || $diff_time + self::OFFSET_SECONDS === $seconds) {
+                if (in_array($secondsStep, [$diff_time, $diff_time + self::OFFSET_SECONDS], true)) {
                     $result[] = [$start, $end];
                 }
                 array_unshift($dateTimeSlots, $end);

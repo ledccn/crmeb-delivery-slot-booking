@@ -91,11 +91,12 @@ class DeliveryScheduleTemplatesService extends BaseServices
             $minutesStep = min($minutesStep, $slot->minutes_step);
             $slots[] = $slot;
         });
-        $secondsStep = (int)($minutesStep * 60);
+
         $diff_time = $end_timestamp - $start_timestamp;
+        $secondsStep = (int)($minutesStep * 60);
 
         // 时间段必须为分钟步长
-        if (($diff_time !== $secondsStep) || (($diff_time + DeliveryScheduleService::OFFSET_SECONDS) !== $secondsStep)) {
+        if (!in_array($secondsStep, [$diff_time, $diff_time + DeliveryScheduleService::OFFSET_SECONDS], true)) {
             throw new ValidateException('时间段必须为' . $minutesStep . '分钟');
         }
 
