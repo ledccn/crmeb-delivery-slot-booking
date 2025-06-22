@@ -14,7 +14,7 @@ class CreateStoreProductParts extends Migrator
      */
     public function change()
     {
-        $table = $this->table('store_product_parts', ['engine' => 'InnoDB', 'comment' => '商品配件']);
+        $table = $this->table('store_product_parts', ['id' => false, 'engine' => 'InnoDB', 'comment' => '商品配件']);
         $table->addColumn('parts_id', AdapterInterface::PHINX_TYPE_INTEGER, ['signed' => false, 'identity' => true, 'comment' => '主键'])->setPrimaryKey('parts_id')
             ->addColumn('title', AdapterInterface::PHINX_TYPE_STRING, ['limit' => 50, 'null' => false, 'comment' => '配件名称'])
             ->addColumn('multiple', AdapterInterface::PHINX_TYPE_INTEGER, ['limit' => MysqlAdapter::INT_TINY, 'signed' => false, 'null' => false, 'default' => 1, 'comment' => '多选'])
