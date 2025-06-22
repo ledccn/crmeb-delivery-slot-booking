@@ -1,13 +1,14 @@
 <?php
 declare (strict_types=1);
 
-namespace Ledc\DeliverySlotBooking;
+namespace Ledc\DeliverySlotBooking\command;
 
 use Ledc\DeliverySlotBooking\services\DeliveryScheduleService;
 use think\console\Command;
 use think\console\Input;
 use think\console\input\Argument;
 use think\console\Output;
+use Throwable;
 
 /**
  * 测试配送时间段
@@ -36,7 +37,7 @@ class TestDeliveryScheduleCommand extends Command
             $date = $input->getArgument('date');
             $result = DeliveryScheduleService::get($date ?: date('Y-m-d'));
             var_dump($result);
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             $output->writeln($throwable->getMessage());
         }
     }

@@ -2,6 +2,7 @@
 
 namespace Ledc\DeliverySlotBooking;
 
+use Ledc\DeliverySlotBooking\command\TestDeliveryScheduleCommand;
 use think\Route;
 
 /**
