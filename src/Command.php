@@ -30,6 +30,9 @@ class Command extends \think\console\Command
             'CreateDeliveryScheduleExceptions' => dirname(__DIR__) . '/migrations/03_create_delivery_schedule_exceptions.php',
             'UpdateStoreOrderExpectedFinishedBetweenTime' => dirname(__DIR__) . '/migrations/04_update_store_order_expected_finished_between_time.php',
             'InsertSystemConfigDeliverySchedule' => dirname(__DIR__) . '/migrations/05_insert_system_config_delivery_schedule.php',
+            'CreateStoreProductParts' => dirname(__DIR__) . '/migrations/06_create_store_product_parts.php',
+            'CreateStoreProductPartsValue' => dirname(__DIR__) . '/migrations/07_create_store_product_parts_value.php',
+            'UpdateProductOrCartParts' => dirname(__DIR__) . '/migrations/08_update_product_or_cart_parts.php',
         ]);
     }
 
