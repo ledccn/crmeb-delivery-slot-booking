@@ -23,6 +23,7 @@ class Service extends \think\Service
      */
     public function register(): void
     {
+        require_once __DIR__ . DIRECTORY_SEPARATOR . 'helpers.php';
     }
 
     /**

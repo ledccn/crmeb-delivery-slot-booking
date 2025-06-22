@@ -6,7 +6,10 @@
   "autoload": {
     "psr-4": {
       "Ledc\\DeliverySlotBooking\\": "src/"
-    }
+    },
+    "files": [
+      "src/helpers.php"
+    ]
   },
   "authors": [
     {
