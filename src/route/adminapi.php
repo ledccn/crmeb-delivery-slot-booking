@@ -12,6 +12,7 @@ use Ledc\DeliverySlotBooking\adminapi\ProductPartsController;
 use Ledc\DeliverySlotBooking\adminapi\ProductPartsValueController;
 use Ledc\DeliverySlotBooking\services\DeliveryScheduleService;
 use think\facade\Route;
+use think\Response;
 
 /**
  * 商品配件相关路由
@@ -36,6 +37,16 @@ Route::group('product_parts', function () {
     Route::get('parts_value/:id', implode('@', [ProductPartsValueController::class, 'read']));
     // 商品配件值 删除
     Route::delete('parts_value/delete', implode('@', [ProductPartsValueController::class, 'delete']));
+
+    Route::miss(function () {
+        if (app()->request->isOptions()) {
+            $header = \think\Facade\Config::get('cookie.header');
+            unset($header['Access-Control-Allow-Credentials']);
+            return Response::create('ok')->code(200)->header($header);
+        } else {
+            return Response::create()->code(404);
+        }
+    });
 })->middleware([
     AllowOriginMiddleware::class,
     AdminAuthTokenMiddleware::class,
@@ -83,6 +94,16 @@ Route::group('delivery-slot-booking', function () {
         Route::post('save', implode('@', [DeliveryScheduleExceptions::class, 'save']));
         Route::get('read', implode('@', [DeliveryScheduleExceptions::class, 'read']));
         Route::delete(':id', implode('@', [DeliveryScheduleExceptions::class, 'delete']));
+    });
+
+    Route::miss(function () {
+        if (app()->request->isOptions()) {
+            $header = \think\Facade\Config::get('cookie.header');
+            unset($header['Access-Control-Allow-Credentials']);
+            return Response::create('ok')->code(200)->header($header);
+        } else {
+            return Response::create()->code(404);
+        }
     });
 })->middleware([
     AllowOriginMiddleware::class,
