@@ -6,7 +6,10 @@
   "autoload": {
     "psr-4": {
       "Ledc\\DeliverySlotBooking\\": "src/"
-    }
+    },
+    "files": [
+      "src/helpers.php"
+    ]
   },
   "authors": [
     {
@@ -17,6 +20,7 @@
   "require": {
     "php": ">=7.4",
     "topthink/framework": ">=6.0",
+    "topthink/think-migration": "^3.1",
     "ledc/think-model-trait": "^7.2.31",
     "ext-json": "*",
     "ext-openssl": "*",
