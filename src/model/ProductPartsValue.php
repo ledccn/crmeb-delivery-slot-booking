@@ -11,6 +11,7 @@ use think\Model;
  * @property string $parts_name 名称
  * @property float $parts_price 加价
  * @property string $parts_image 图片
+ * @property boolean|int $checked 是否选中
  * @property int $sort 排序
  * @property string $verify_hash 校验哈希
  * @property string $create_time 创建时间

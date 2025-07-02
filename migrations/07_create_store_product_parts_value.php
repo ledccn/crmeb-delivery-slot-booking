@@ -19,6 +19,7 @@ class CreateStoreProductPartsValue extends Migrator
             ->addColumn('parts_name', AdapterInterface::PHINX_TYPE_STRING, ['limit' => 100, 'comment' => '配件名称', 'null' => false])
             ->addColumn('parts_price', AdapterInterface::PHINX_TYPE_DECIMAL, ['precision' => 8, 'scale' => 2, 'comment' => '配件价格', 'null' => false, 'signed' => false, 'default' => 0.00])
             ->addColumn('parts_image', AdapterInterface::PHINX_TYPE_STRING, ['limit' => 300, 'comment' => '配件图片', 'null' => false, 'default' => ''])
+            ->addColumn('checked', AdapterInterface::PHINX_TYPE_BOOLEAN, ['comment' => '是否选中', 'null' => false, 'default' => false])
             ->addColumn('sort', AdapterInterface::PHINX_TYPE_SMALL_INTEGER, ['limit' => MysqlAdapter::INT_SMALL, 'comment' => '排序', 'null' => false, 'signed' => false, 'default' => 100])
             ->addColumn('verify_hash', AdapterInterface::PHINX_TYPE_CHAR, ['limit' => 32, 'comment' => '验证哈希', 'null' => false])
             ->addColumn('create_time', 'datetime', ['comment' => '创建时间', 'null' => false, 'default' => 'CURRENT_TIMESTAMP'])
