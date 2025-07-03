@@ -33,6 +33,7 @@ class Command extends \think\console\Command
             'CreateStoreProductParts' => dirname(__DIR__) . '/migrations/06_create_store_product_parts.php',
             'CreateStoreProductPartsValue' => dirname(__DIR__) . '/migrations/07_create_store_product_parts_value.php',
             'UpdateProductOrCartParts' => dirname(__DIR__) . '/migrations/08_update_product_or_cart_parts.php',
+            'InsertBrokerageMemberPayer' => dirname(__DIR__) . '/migrations/09_insert_brokerage_member_payer.php',
         ]);
     }
 
