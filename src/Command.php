@@ -34,6 +34,7 @@ class Command extends \think\console\Command
             'CreateStoreProductPartsValue' => dirname(__DIR__) . '/migrations/07_create_store_product_parts_value.php',
             'UpdateProductOrCartParts' => dirname(__DIR__) . '/migrations/08_update_product_or_cart_parts.php',
             'InsertBrokerageMemberPayer' => dirname(__DIR__) . '/migrations/09_insert_brokerage_member_payer.php',
+            'InsertSystemConfigFirstOrderBrokerage' => dirname(__DIR__) . '/migrations/10_insert_system_config_first_order_brokerage.php',
         ]);
     }
 
